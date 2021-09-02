@@ -36,14 +36,15 @@ def generator(inputDir, batchSize, augment=False, randomSeed=42):
     #Define classification labels
     labelCode={"AutumRoyal":0, "Crimson":1, "Itum4":2, "Itum5":3, "Itum9":4}
     
-    #Get filename
+    #Get filenames, in a random order
     arraysNames=os.listdir(inputDir)
     
     #Used to load the whole dataset without DA
     loadAux=0
     
     while (True):
-        if augment==False:
+        if augment==True:
+            #Create batches sampling randomly
             Index=np.random.choice(range(len(arraysNames)), size=batchSize,
                                    replace=False)
         else:
