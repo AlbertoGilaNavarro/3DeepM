@@ -1,3 +1,7 @@
+from tensorflow.keras.layers import Input, Conv3D, Activation, BatchNormalization
+from tensorflow.keras.layers import AveragePooling3D, GlobalAveragePooling3D, Dense
+from tensorflow.keras import Model
+
 def _3D_CNN(dimensions,modelName, nClasses, kernelSizes,
                          multiOutput=False):
   inputLayer=Input(shape=dimensions)
