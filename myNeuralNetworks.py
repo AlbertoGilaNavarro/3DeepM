@@ -66,15 +66,3 @@ def _2D_MLP(dimensions, modelName, nClasses, nUnits):
     model.summary()
     return model
 
-
-
-#Example of usage
-#3D
-cnnArgs={"dimensions":(140,200,37,1), "modelName":"3DeepM_KS5-10",
-           "nClasses":5, "kernelSizes":((5,5,5),(10,10,10))}
-model=_3D_CNN(**cnnArgs)
-#2D
-mlpArgs={"dimensions":37, "modelName":"simpleMLP",
-           "nClasses":5, "nUnits":(32,24,16,8)}
-model=_2D_MLP(**mlpArgs)
-
