@@ -1,4 +1,4 @@
-def _3DCNN(dimensions,modelName, nClasses, kernelSizes,
+def _3D_CNN(dimensions,modelName, nClasses, kernelSizes,
                          multiOutput=False):
   inputLayer=Input(shape=dimensions)
 
@@ -46,7 +46,35 @@ def _3DCNN(dimensions,modelName, nClasses, kernelSizes,
   model.summary()
   return model
 
+def _2D_MLP(dimensions, modelName, nClasses, nUnits):
+    inputLayer=Input(shape=dimensions, name="Input")
+    x=Dense(units=nUnits[0], activation="relu",
+            kernel_initializer="he_uniform", name="Dense1")(inputLayer)
+    x=BatchNormalization(name="BNorm1")(x)
+    x=Dense(units=nUnits[1], activation="relu",
+            kernel_initializer="he_uniform", name="Dense2")(x)
+    x=BatchNormalization(name="BNorm2")(x)
+    x=Dense(units=nUnits[2], activation="relu",
+            kernel_initializer="he_uniform", name="Dense3")(x)
+    x=BatchNormalization(name="BNorm3")(x)
+    x=Dense(units=nUnits[3], activation="relu",
+            kernel_initializer="he_uniform", name="Dense4")(x)
+    x=BatchNormalization(name="BNorm4")(x)
+    outputLayer=Dense(units=nClasses, activation="sigmoid", name="Output")(x)
+    
+    model=Model(inputs=inputLayer, outputs=outputLayer, name=modelName)
+    model.summary()
+    return model
+
+
+
 #Example of usage
-modelArgs={"dimensions":(140,200,37,1), "modelName":"3DeepM_KS5-10",
+#3D
+cnnArgs={"dimensions":(140,200,37,1), "modelName":"3DeepM_KS5-10",
            "nClasses":5, "kernelSizes":((5,5,5),(10,10,10))}
-model=_3DCNN(**modelArgs)
+model=_3D_CNN(**cnnArgs)
+#2D
+mlpArgs={"dimensions":37, "modelName":"simpleMLP",
+           "nClasses":5, "nUnits":(32,24,16,8)}
+model=_2D_MLP(**mlpArgs)
+
