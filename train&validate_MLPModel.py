@@ -41,6 +41,7 @@ model.compile(loss="categorical_crossentropy", optimizer=Adam(learning_rate=0.00
               metrics=["accuracy"])
 
 #%%Fit and evaluae normally with the Keras method
+classWeights = { 0 : 2.5 , 1 : 1.25 , 2 : 6 , 3 : 1 , 4 : 5.25 }
 mlpHistory=model.fit(x=trainX, y=trainY, batch_size=32, epochs=25,
           validation_data=(valX, valY), class_weight=classWeights)
 
@@ -58,10 +59,10 @@ plt.title("Evolution of loss/metric during training")
 plt.xlabel("Epoch nº")
 plt.ylabel("Categorical crossentropy/accuracy")
 plt.legend()
-plt.savefig("lameMLP"+"_History.png")
+plt.savefig("simpleMLP"+"_History.png")
 #Table
 header=["loss","val_loss", "accuracy", "val_accuracy"]
-histTable=open("lameMLP"+"_modelHistory.txt", "w")
+histTable=open("simpleMLP"+"_modelHistory.txt", "w")
 histTable.write("\t".join(header))
 histTable.write("\n")
 
