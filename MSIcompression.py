@@ -15,7 +15,8 @@ for i in range(len(arraysNames)):
     path=os.path.join(inputDir, arraysNames[i])
     array=np.load(path)
     
-    #Filter in the channel 22. This is empirical, you can choose another channel
+    #Filter in the channel 22 with a reflectance threshold of 25.
+    #This is empirical, you can choose another channel and try another filter value
     mask=np.where(array[:,:,22]>25, 1, 0)
     
     #Saves a visible mask for quality control purposes
@@ -25,7 +26,7 @@ for i in range(len(arraysNames)):
     path=os.path.join("masks", arraysNames[i].split(".")[0]+".png")
     cv.imwrite(path, segMask)
     
-    #Extract object pixels. The threshold value is also empirically selected. You can try another value
+    #Extract object pixels. 
     index=np.where(array[:,:,22]>25)
     objPixels=array[index[0], index[1], :]
     print(objPixels.shape)
