@@ -75,9 +75,9 @@ def generator(inputDir, batchSize, augment=False, randomSeed=42):
         
 #%% Input parameters
 #You must split the dataset into train, validation and test subsets manually, respecting the class proportions
-trainDir="subDataSets/Train" #Ajuste de parametros entrenables
-valDir=trainDir.replace("Train", "Val") #Seleccion de modelos
-testDir=trainDir.replace("Train", "Test") #Evaluacion final
+trainDir="subDataSets/Train" 
+valDir=trainDir.replace("Train", "Val") 
+testDir=trainDir.replace("Train", "Test")
 
 epochNumber=10
 batchSize=16
